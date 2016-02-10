@@ -1,0 +1,26 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+
+dependencies {
+    compile name: 'watson-developer-cloud-2.7.1'
+    compile 'com.google.code.gson:gson:2.5'
+    compile group: 'com.squareup.okhttp', name: 'okhttp', version:'2.7.0'
+    compile group: 'com.google.code.gson', name: 'gson', version:'2.5'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.4'
+    compile group: 'com.neovisionaries', name: 'nv-websocket-client', version:'1.19'
+}
+
+
+jar {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest {
+        attributes 'Main-Class': 'net.tutorial.TradeoffAnalyticsExample'
+    }
+}
